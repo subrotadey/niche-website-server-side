@@ -3,6 +3,7 @@ const app = express()
 const ObjectId = require('mongodb').ObjectId
 const { MongoClient } = require('mongodb');
 const cors = require('cors')
+require('dotenv').config()
 const port = process.env.PORT || 5000;
 
 // middleware
@@ -10,8 +11,10 @@ app.use(cors())
 app.use(express.json())
 
 // connect to database
-const uri = "mongodb+srv://carFair:Pjz8sh3iEDR7Y4r4@cluster0.aghhg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.hs9qs.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+console.log(uri);
 
 async function run() {
     try {
